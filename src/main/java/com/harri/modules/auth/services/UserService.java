@@ -19,14 +19,14 @@ public class UserService {
     EntityManager em;
 
     @Transactional
-    public void registerUser(String username, String password) {
+    public void save(String username, String password) {
         User user = new User();
         user.setUsername(username);
         user.setPasswordHash(BCrypt.hashpw(password, BCrypt.gensalt()));
         em.persist(user);
     }
 
-    public String authenticateUser(String username, String password) {
+    public String authenticate(String username, String password) {
         User user = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
                 .setParameter("username", username)
                 .getSingleResult();

@@ -1,12 +1,9 @@
 package com.harri.modules.auth.entities.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class UserDTO {
     private String username;
     private String password;
 
-    // Construtores
     public UserDTO() {}
 
     public UserDTO(String username, String password) {
@@ -14,7 +11,6 @@ public class UserDTO {
         this.password = password;
     }
 
-    // Getters e setters
     public String getUsername() {
         return username;
     }

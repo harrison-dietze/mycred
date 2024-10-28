@@ -26,24 +26,18 @@ public class AuthController {
     @POST
     @RolesAllowed("Admin")
     @Path("/register")
-    public Response register(UserDTO userDTO) {
-        userService.registerUser(userDTO.getUsername(), userDTO.getPassword());
+    public Response save(UserDTO userDTO) {
+        userService.save(userDTO.getUsername(), userDTO.getPassword());
         return Response.status(Response.Status.CREATED).build();
     }
 
-    @POST
-    @Path("/test")
-    @RolesAllowed("Admin")
-    public Response test(String json) {
-        return Response.ok(json).build();
-    }
 
     @POST
     @Path("/login")
     @PermitAll
     public Response login(UserDTO userDTO) {
         try {
-            String token = userService.authenticateUser(userDTO.getUsername(), userDTO.getPassword());
+            String token = userService.authenticate(userDTO.getUsername(), userDTO.getPassword());
             return Response.ok(new TokenDTO(token)).build();
         } catch (SecurityException e) {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Incorrect user or password.").build();

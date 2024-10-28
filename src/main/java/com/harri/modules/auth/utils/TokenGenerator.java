@@ -17,6 +17,7 @@ public class TokenGenerator {
         String token =
                 Jwt.issuer("https://example.com/issuer")
                         .upn(username)
+                        .expiresIn(36000L)
                         .groups(new HashSet<>(Arrays.asList("User", "Admin")))
                         .sign();
         return token;
